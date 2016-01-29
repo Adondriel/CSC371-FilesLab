@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -12,18 +14,27 @@ import javax.swing.SortingFocusTraversalPolicy;
 public class FilesLab {
 	public static void main(String[] args) throws IOException {
 		// InputStream inputStream = FilesLab.class.getResourceAsStream();
-		//BufferedReader file = new BufferedReader(new FileReader("employees.txt"));
+		// BufferedReader file = new BufferedReader(new
+		// FileReader("employees.txt"));
 		FilesLab obj = new FilesLab();
 		String data = obj.getFile("employees.txt");
-		String[] splitData= data.split("\\t");
-		System.out.println(splitData);
-		
-//		StringTokenizer st = new StringTokenizer(data);
-//		 while (st.hasMoreTokens()) {
-//		     System.out.println(st.nextToken());
-//		 }
-		//System.out.println(obj.getFile("employees.txt"));
-		//file.close();
+		ArrayList<ArrayList<String>> splitData = new ArrayList<ArrayList<String>>();
+		StringTokenizer st = new StringTokenizer(data, "\n");
+		while (st.hasMoreTokens()) {
+			ArrayList<String> tempArrayList = new ArrayList<String>(Arrays.asList(st.nextToken().split("\\t")));
+			splitData.add(tempArrayList);
+		}
+		for (ArrayList<String> row : splitData) {
+			System.out.println("");
+			for (String item : row) {
+				System.out.println(splitData.get(splitData.indexOf(row)).get(row.indexOf(item)));
+			}
+		}
+		for (ArrayList<String> row : splitData) {
+			System.out.println(row);
+		}
+		System.out.println(splitData.get(5).get(5));
+
 	}
 
 	private String getFile(String fileName) {
