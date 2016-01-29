@@ -9,11 +9,16 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-
+/**
+ * This is used to read and write data in a consistent format between the different functions.
+ * It reads the data in as a Two dimensional ArrayList, of Strings. The first splitData.get(x) gives you the row, with an ArrayList of Strings, the second .get(y) will give you the column.
+ * @author Adam
+ *
+ */
 public class FilesLab {
 	public static void main(String[] args) throws IOException {
-		ArrayList<ArrayList<String>> splitData = getArrayListFromFile("employees.txt");
-		writeToFile("testoutput.txt", splitData);
+		ArrayList<ArrayList<String>> splitData = getArrayListFromFile(FilesLabConstants.EMPLOYEE_INPUT_FILE);
+		writeToFile(FilesLabConstants.EMPLOYEE_OUTPUT_FILE, splitData);
 	}
 
 	public String getFile(String fileName) {
