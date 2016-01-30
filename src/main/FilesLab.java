@@ -12,19 +12,15 @@ import java.util.StringTokenizer;
 /**
  * This is used to read and write data in a consistent format between the different functions.
  * It reads the data in as a Two dimensional ArrayList, of Strings. The first splitData.get(x) gives you the row, with an ArrayList of Strings, the second .get(y) will give you the column.
- * @author Adam Pine
+ * @author Adam
  *
  */
 public class FilesLab {
-//	public static void main(String[] args) throws IOException {
-//		ArrayList<ArrayList<String>> splitData = getArrayListFromFile(FilesLabConstants.EMPLOYEE_INPUT_FILE);
-//		writeToFile(FilesLabConstants.EMPLOYEE_OUTPUT_FILE, splitData);
-//	}
-	/**
-	 * Gets the file as one long string
-	 * @param fileName - The name of the file that the program should look for.
-	 * @return the file, as one string, separated by newlines.
-	 */
+	public static void main(String[] args) throws IOException {
+		ArrayList<ArrayList<String>> splitData = getArrayListFromFile(FilesLabConstants.EMPLOYEE_INPUT_FILE);
+		writeToFile(FilesLabConstants.EMPLOYEE_OUTPUT_FILE, splitData);
+	}
+
 	public String getFile(String fileName) {
 		StringBuilder result = new StringBuilder("");
 		Charset charset = Charset.forName("US-ASCII");
@@ -32,7 +28,7 @@ public class FilesLab {
 		try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
 		    String line = null;
 		    while ((line = reader.readLine()) != null) {
-		        //System.out.println(line);
+		        System.out.println(line);
 				result.append(line).append("\n");
 		    }
 		} catch (IOException x) {
@@ -40,11 +36,7 @@ public class FilesLab {
 		}
 		return result.toString();
 	}
-	/**
-	 * Separates the file into a two dimension arraylist, of strings.
-	 * @param fileName - the file to get the data from.
-	 * @return two dimensional ArrayList of strings.
-	 */
+	
 	public static ArrayList<ArrayList<String>> getArrayListFromFile(String fileName){
 		FilesLab obj = new FilesLab();
 		String data = obj.getFile(fileName);
@@ -56,12 +48,7 @@ public class FilesLab {
 		}
 		return splitData;
 	}
-	/**
-	 * Writes the two dimension ArrayList to the specified file name
-	 * @param fileName - where to write the output.
-	 * @param splitData - The 2D arraylist of strings that contains the data that needs to be written.
-	 * @throws IOException
-	 */
+	
 	public static void writeToFile(String fileName, ArrayList<ArrayList<String>> splitData) throws IOException{
 		PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 		for (ArrayList<String> row : splitData){

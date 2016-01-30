@@ -1,7 +1,7 @@
 package main;
 /**
  * Used to map the column names to numbers.
- * @author Adam Pine
+ * @author Adam
  *
  */
 public enum EmployeeColumnNameMappings {
