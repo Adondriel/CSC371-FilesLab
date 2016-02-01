@@ -24,10 +24,8 @@ public class CommissionComputation {
 		ArrayList<Integer> fitCriteria = new ArrayList<Integer>(); //holds values of all included records		
 		DateFormat format = new SimpleDateFormat("MM/dd/yy"); //converts date strings to dates
 		Date readDate; //current dates of records as they are read in
-//		Date startDate = format.parse(args[1]); //converts command line to date
-//		Date endDate = format.parse(args[2]); //converts command line to date
-		Date startDate = format.parse("01/01/2015"); //temp until cmd line
-		Date endDate = format.parse("01/07/2015"); //temp until cmd line
+		Date startDate = format.parse(args[0]); //converts command line to date
+		Date endDate = format.parse(args[1]); //converts command line to date
 		
 		//Stores locations of included records in fitCriteria
 		for(int i=1; i<salesRows.size(); i++) {
