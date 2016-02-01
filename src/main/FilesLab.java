@@ -12,15 +12,19 @@ import java.util.StringTokenizer;
 /**
  * This is used to read and write data in a consistent format between the different functions.
  * It reads the data in as a Two dimensional ArrayList, of Strings. The first splitData.get(x) gives you the row, with an ArrayList of Strings, the second .get(y) will give you the column.
- * @author Adam
+ * @author Adam Pine
  *
  */
 public class FilesLab {
-	public static void main(String[] args) throws IOException {
-		ArrayList<ArrayList<String>> splitData = getArrayListFromFile(FilesLabConstants.EMPLOYEE_INPUT_FILE);
-		writeToFile(FilesLabConstants.EMPLOYEE_OUTPUT_FILE, splitData);
-	}
-
+//	public static void main(String[] args) throws IOException {
+//		ArrayList<ArrayList<String>> splitData = getArrayListFromFile(FilesLabConstants.EMPLOYEE_INPUT_FILE);
+//		writeToFile(FilesLabConstants.EMPLOYEE_OUTPUT_FILE, splitData);
+//	}
+	/**
+	 * Gets the file as one long string
+	 * @param fileName - The name of the file that the program should look for.
+	 * @return the file, as one string, separated by newlines.
+	 */
 	public String getFile(String fileName) {
 		StringBuilder result = new StringBuilder("");
 		Charset charset = Charset.forName("US-ASCII");
