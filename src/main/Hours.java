@@ -21,7 +21,7 @@ public class Hours
 	private static ArrayList<ArrayList<String>> employeeDB = FilesLab.getArrayListFromFile(FilesLabConstants.EMPLOYEE_INPUT_FILE); //Employee TXT File
 	private static ArrayList<ArrayList<String>> writeArray = new ArrayList<ArrayList<String>>(); //Array to be written to file
 	
-	public static void main(String[] args) throws ParseException, IOException 
+	public static void main(String[] args) throws ParseException, IOException
 	{		
 		
 		
@@ -66,27 +66,27 @@ public class Hours
 			
 			for(int i=1; i<employeeDB.size(); i++)
 			{
-				if(employeeDB.get(i).get(3)=="Accounting")
+				if(employeeDB.get(i).get(3).equalsIgnoreCase("accounting"))
 				{
 					AccountingList.add(employeeDB.get(i));
 				}
-				else if (employeeDB.get(i).get(3)=="Administration")
+				else if (employeeDB.get(i).get(3).equalsIgnoreCase("Administration"))
 				{
 					AdministrationList.add(employeeDB.get(i));
 				}
-				else if (employeeDB.get(i).get(3)=="Human Resources")
+				else if (employeeDB.get(i).get(3).equalsIgnoreCase("Human Resources"))
 				{
 					HRList.add(employeeDB.get(i));
 				}
-				else if (employeeDB.get(i).get(3)=="Operations")
+				else if (employeeDB.get(i).get(3).equalsIgnoreCase("Operations"))
 				{
 					OperationsList.add(employeeDB.get(i));
 				}
-				else if (employeeDB.get(i).get(3)=="Purchasing")
+				else if (employeeDB.get(i).get(3).equalsIgnoreCase("Purchasing"))
 				{
 					PurchasingList.add(employeeDB.get(i));
 				}
-				else if (employeeDB.get(i).get(3)=="Sales")
+				else if (employeeDB.get(i).get(3).equalsIgnoreCase("Sales"))
 				{
 					SalesList.add(employeeDB.get(i));
 				}
@@ -105,7 +105,7 @@ public class Hours
 			{
 				if(list.get(i).get(6)=="Hour")
 				{
-					//Run hourly rate calc
+					//Run hourly rate 
 					//check if hours clocked fall within entered data parameters
 					
 					int employeeId = Integer.parseInt(list.get(i).get(0));
@@ -124,10 +124,10 @@ public class Hours
 					DateFormat format = new SimpleDateFormat("MMM-dd"); //converts date strings to dates
 					
 					
-					for(int i = 1, i<hours.size(), i++)
-					{
-						
-					}
+//					for(int i = 1; i<hours.size(); i++)
+//					{
+//						
+//					}
 				}
 				
 				else
