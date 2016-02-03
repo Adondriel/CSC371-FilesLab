@@ -10,5 +10,5 @@ public class FilesLabConstants {
 	public static String HOURS_INPUT_FILE = "hours.txt";
 	public static String HOURS_OUTPUT_FILE = "testHours.txt";
 	public static String SALES_INPUT_FILE = "sales.txt";
-	public static String SALES_OUTPUT_FILE = "testSales.txt";
+	public static String SALES_OUTPUT_FILE = "commissions.txt";
 }
