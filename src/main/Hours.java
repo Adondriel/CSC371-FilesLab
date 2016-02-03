@@ -23,7 +23,16 @@ public class Hours
 	
 	public static void main(String[] args) throws ParseException, IOException 
 	{		
+		
+		
+		
 		ArrayList<Integer> fitCriteria = new ArrayList<Integer>(); //holds values of all included records		
+		
+		
+		/**
+		 * Takes in command line arguments, aka date range and converts it to dates.
+		 */
+		
 		DateFormat format = new SimpleDateFormat("MM/dd/yy"); //converts date strings to dates
 		Date readDate; //current dates of records as they are read in
 		Date startDate = new Date(0);
@@ -39,7 +48,9 @@ public class Hours
 	}
 	
 	
-		
+		/**
+		 * Sub-ArrayLists of each department
+		 */
 		private static ArrayList<ArrayList<String>> AccountingList = new ArrayList<ArrayList<String>>();
 		private static ArrayList<ArrayList<String>> AdministrationList = new ArrayList<ArrayList<String>>();
 		private static ArrayList<ArrayList<String>> HRList = new ArrayList<ArrayList<String>>();
@@ -96,10 +107,38 @@ public class Hours
 				{
 					//Run hourly rate calc
 					//check if hours clocked fall within entered data parameters
+					
+					int employeeId = Integer.parseInt(list.get(i).get(0));
+					double hourlyPay = 0;
+					
+					for(int j=0; j<employeeDB.size(); j++) 
+					{
+						if((Integer.parseInt(employeeDB.get(j).get(0))) == employeeId)			//Get employee pay rate from employeeDB
+							{
+								hourlyPay = Integer.parseInt(employeeDB.get(j).get(5));
+							}
+					}
+					
+					
+					
+					DateFormat format = new SimpleDateFormat("MMM-dd"); //converts date strings to dates
+					
+					
+					for(int i = 1, i<hours.size(), i++)
+					{
+						
+					}
 				}
-				//run commission calc
+				
+				else
+				{
+					//run commission calc
+					
+					
+					
+					
+				}	
 			}
-			
 			
 		}
 		
