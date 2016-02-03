@@ -105,7 +105,7 @@ public class Hours
 			{
 				if(list.get(i).get(6)=="Hour")
 				{
-					//Run hourly rate 
+					//Run hourly rate calc
 					//check if hours clocked fall within entered data parameters
 					
 					int employeeId = Integer.parseInt(list.get(i).get(0));
@@ -119,24 +119,37 @@ public class Hours
 							}
 					}
 					
+					//Check if hours are over 40, if so apply business rules.
+					if(hourlyPay>40)
+					{
+						double temp = hourlyPay-40.0;
+						temp = temp*1.5;
+						hourlyPay = hourlyPay+temp;
+					}
 					
 					
+					//Get hours for this individual week and multiply them by employees hourly rate.
 					DateFormat format = new SimpleDateFormat("MMM-dd"); //converts date strings to dates
+					double hours;
+					double weeklyPay = hourlyPay*hours;
 					
+					//Send final number to ArrayList.
 					
-//					for(int i = 1; i<hours.size(); i++)
-//					{
-//						
-//					}
+					for(int i = 1, i<hours.size(), i++)
+					{
+						
+					}
 				}
 				
 				else
 				{
 					//run commission calc
+					//Take salary and divide it by 52 for the weekly pay.
 					
+					double weeklyCommission = Integer.parseInt(employeeDB.get(i).get(6));
+					weeklyCommission = weeklyCommission/52;
 					
-					
-					
+					//Send this to final array.
 				}	
 			}
 			
