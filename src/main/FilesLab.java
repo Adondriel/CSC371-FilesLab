@@ -57,7 +57,7 @@ public class FilesLab {
 		PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 		for (ArrayList<String> row : splitData){
 			for (String item : row){
-				writer.print(item + " ");
+				writer.print(item + "\t");
 			}
 			writer.print("\n");
 		}
