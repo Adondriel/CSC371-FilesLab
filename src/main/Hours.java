@@ -72,17 +72,17 @@ public class Hours
 		
 		
 		formatListHeader("Department: Accounting");					//Print header to file
-		checkWageType(AccountingList);								//Calculate Wage
+		computeEmployeePayroll(AccountingList);						//Calculate Wage
 		formatListHeader("Department: Administration");
-		checkWageType(AdministrationList);
+		computeEmployeePayroll(AdministrationList);
 		formatListHeader("Department: Human Resources");
-		checkWageType(HRList);
+		computeEmployeePayroll(HRList);
 		formatListHeader("Department: Operations");
-		checkWageType(OperationsList);
+		computeEmployeePayroll(OperationsList);
 		formatListHeader("Department: Purchasing");
-		checkWageType(PurchasingList);
+		computeEmployeePayroll(PurchasingList);
 		formatListHeader("Department: Sales");
-		checkWageType(SalesList);
+		computeEmployeePayroll(SalesList);
 
 		FilesLab.writeToFile(FilesLabConstants.HOURS_OUTPUT_FILE, payrollDB);	//Print final report to .txt
 	}
@@ -128,7 +128,7 @@ public class Hours
 		
 		// 2. Check if hourly or salary-based pay level
 		
-		public static void checkWageType(ArrayList<ArrayList<String>> list) throws IOException, ParseException
+		public static void computeEmployeePayroll(ArrayList<ArrayList<String>> list) throws IOException, ParseException
 		{
 			double departmentPayrollTotal = 0.0;
 			
@@ -156,19 +156,37 @@ public class Hours
 					//check if hours clocked fall within entered data parameters
 				
 					double hourlyRate = Double.parseDouble(list.get(i).get(5));
-					double hoursWorked = 0;
+					double hoursWorked = 0.0;
 					
 					
 					
 					//Find hours within date range.
 					
-					DateFormat format = new SimpleDateFormat("MMM-dd"); //converts date strings to dates
-					
-					
+					ArrayList<ArrayList<String>> hoursData = FilesLab.getArrayListFromFile(FilesLabConstants.HOURS_INPUT_FILE);
+					int weekOf = 0;
+					for(int j=1; j<hoursData.size(); j++) 
+					{
+						//Find Employee ID in list
+						if(hoursData.get(0).equals(employeeId))
+								{
+									
+									//While still in employee section, search for applicable date range.
+									while((hoursData.get(0).equals(employeeId))|| hoursData.get(0).equals(""))
+										{
+											if(hoursData.get(1).equals(weekOf+"-Jan"))
+											{
+												hoursWorked = Double.parseDouble(hoursData.get(j).get(2));
+												break;
+											}
+										}
+								}
+						
+					}
+								
 					
 					
 					//Check if hours are over 40, if so apply business rules.
-					if(hoursWorked>40)
+					if(hoursWorked>40.0)
 					{
 						double temp = hoursWorked-40.0;
 						temp = temp*(hourlyRate*1.5);
@@ -224,9 +242,6 @@ public class Hours
 		}
 		
 		
-		
-		
-		
 		public static void formatListHeader(String input)
 		{
 			ArrayList<String> temp = new ArrayList<String>();
@@ -234,5 +249,4 @@ public class Hours
 			payrollDB.add(temp);
 		}
 		
-	
 }
