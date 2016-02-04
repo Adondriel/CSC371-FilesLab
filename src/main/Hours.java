@@ -134,14 +134,14 @@ public class Hours {
 				/************************
 				 * TODO: This Date parsing doesn't work. Need to fix!
 				 */
-				DateFormat dateForm = new SimpleDateFormat("MM/dd/yy"); // converts
+				DateFormat hoursdateForm = new SimpleDateFormat("d-MMM"); // converts
 																		// date
 																		// strings
 																		// to
 																		// dates
 
 				for (int j = 1; j < hoursData.size(); j++) {
-					Date readDate = dateForm.parse(hoursData.get(j).get(1));
+					Date readDate = hoursdateForm.parse(hoursData.get(j).get(1));
 					// Find Employee ID in list
 					if (hoursData.get(j).get(0).equals(employeeId)) {
 
