@@ -227,6 +227,7 @@ public class Hours
 				
 				double totalPay = weeklyPay+weeklyCommission;
 				departmentPayrollTotal+=totalPay;
+				newRow.add(String.format("%.2f", totalPay));
 
 				//Add employee financial info row to payrollDB
 				payrollDB.add(newRow);
