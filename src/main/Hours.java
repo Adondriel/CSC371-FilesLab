@@ -5,7 +5,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import java.util.ArrayList;
 
 /**
@@ -22,8 +21,8 @@ public class Hours
 	private static ArrayList<ArrayList<String>> employeeDB = FilesLab.getArrayListFromFile(FilesLabConstants.EMPLOYEE_INPUT_FILE); //Employee TXT File
 	private static ArrayList<ArrayList<String>> payrollDB = new ArrayList<ArrayList<String>>(); //Array to be written to file
 	
-	private static Date startDate;
-	private static Date endDate;
+	private static Date startDate = new Date(0);
+	private static Date endDate = new Date(Long.MAX_VALUE);
 	
 	/**
 	 * Sub-ArrayLists of each department
@@ -49,8 +48,6 @@ public class Hours
 		 */
 		
 		DateFormat format = new SimpleDateFormat("MM/dd/yy"); //converts date strings to dates
-		startDate = new Date(0);
-		endDate = new Date(Long.MAX_VALUE);
 		try {
 			startDate = format.parse(args[0]); //converts command line to date
 			endDate = format.parse(args[1]); //converts command line to date
@@ -96,7 +93,7 @@ public class Hours
 			
 			for(int i=1; i<employeeDB.size(); i++)
 			{
-				if(employeeDB.get(i).get(3).equalsIgnoreCase("accounting"))
+				if(employeeDB.get(i).get(3).equalsIgnoreCase("Accounting"))
 				{
 					AccountingList.add(employeeDB.get(i));
 				}
@@ -144,13 +141,12 @@ public class Hours
 				
 				//Prints Employee's name to ArrayList
 				String name = "		"+list.get(i).get(1)+", "+list.get(i).get(2);
-				newRow.add(String.format("%d", name));
-				//newRow.set(i, name);
+				newRow.add(String.format("%s", name));
 			
 				double weeklyPay = 0.0;
 				
 				
-				if(list.get(i).get(6)=="Hour")
+				if(list.get(i).get(6).equalsIgnoreCase("Hour"))
 				{
 					//Run hourly rate calculator
 					//check if hours clocked fall within entered data parameters
@@ -163,23 +159,28 @@ public class Hours
 					//Find hours within date range.
 					
 					ArrayList<ArrayList<String>> hoursData = FilesLab.getArrayListFromFile(FilesLabConstants.HOURS_INPUT_FILE);
-					int weekOf = 0;
+					
+					/************************
+					 * TODO: This Date parsing doesn't work.  Need to fix!
+					 */
+					DateFormat dateForm = new SimpleDateFormat("MM/dd/yy"); //converts date strings to dates
+					
 					for(int j=1; j<hoursData.size(); j++) 
 					{
+						Date readDate = dateForm.parse(hoursData.get(j).get(1));
 						//Find Employee ID in list
-						if(hoursData.get(0).equals(employeeId))
-								{
-									
-									//While still in employee section, search for applicable date range.
-									while((hoursData.get(0).equals(employeeId))|| hoursData.get(0).equals(""))
-										{
-											if(hoursData.get(1).equals(weekOf+"-Jan"))
-											{
-												hoursWorked = Double.parseDouble(hoursData.get(j).get(2));
-												break;
-											}
+						if(hoursData.get(j).get(0).equals(employeeId))
+							{
+								
+								//While still in employee section, search for applicable date range.
+								while((hoursData.get(j).get(0).equals(employeeId))|| hoursData.get(j).get(0).equals(""))
+									{
+										if(readDate == endDate) {
+											hoursWorked = Double.parseDouble(hoursData.get(j).get(2));
+											break;
 										}
-								}
+									}
+							}
 						
 					}
 								
@@ -206,7 +207,7 @@ public class Hours
 				{
 					//Take salary and divide it by 52 for the weekly pay.
 					
-					double weeklySalary = Double.parseDouble(list.get(i).get(6));
+					double weeklySalary = Double.parseDouble(list.get(i).get(5));
 					weeklyPay = weeklySalary/52;
 					
 					//Send this to final array.
@@ -235,7 +236,7 @@ public class Hours
 			// 5. Add total department pay together to create Total Payroll.
 			
 			ArrayList<String> newRow = new ArrayList<String>();
-			newRow.add(String.format("%.2f", "Total Payroll:  " + departmentPayrollTotal));
+			newRow.add(String.format("Total Payroll: %.2f", departmentPayrollTotal));
 			payrollDB.add(newRow);
 
 			
