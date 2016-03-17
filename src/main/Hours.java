@@ -72,12 +72,9 @@ public class Hours {
 		computeEmployeePayroll(PurchasingList);
 		formatListHeader("Department: Sales");
 		computeEmployeePayroll(SalesList);
-
-		FilesLab.writeToFile(FilesLabConstants.HOURS_OUTPUT_FILE, payrollDB); // Print
-																				// final
-																				// report
-																				// to
-																				// .txt
+		//print the final report
+		FilesLab.writeToFile(FilesLabConstants.HOURS_OUTPUT_FILE, payrollDB); 
+		System.out.println("Payroll printed to payroll.txt");
 	}
 
 	// 1. Sort employees by department
